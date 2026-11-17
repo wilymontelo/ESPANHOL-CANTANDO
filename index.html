@@ -13,13 +13,18 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/video/vsl-poster.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
+  <!-- ?mapa=1 = página aberta dentro do painel de funis (mapa de calor): sem pixel e sem Clarity -->
   <script>
-    window.pixelId = "lt_px_5dc494c1a96c";
-    var a = document.createElement("script");
-    a.setAttribute("async", "");
-    a.setAttribute("defer", "");
-    a.setAttribute("src", "https://lowtrack.com.br/pixel.js");
-    document.head.appendChild(a);
+    if (!/[?&]mapa=1(&|$)/.test(location.search)) {
+      // a cópia fiel da Pages já traz o pixel como tag fixa: só injeta se ainda não estiver na página
+      window.pixelId = "lt_px_5dc494c1a96c";
+      if (!document.querySelector('script[src*="lowtrack.com.br/pixel"]')) { var a = document.createElement("script"); a.setAttribute("async", ""); a.setAttribute("defer", ""); a.setAttribute("src", "https://lowtrack.com.br/pixel.js"); document.head.appendChild(a); }
+      // Microsoft Clarity — projeto "ESPANHOL CANTANDO". Na cópia fiel da Pages o clarity.js já vem como tag fixa
+      // e roda antes da config, então só criamos a fila com o "start". Fora da Pages, snippet normal.
+      (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        if(l.querySelector('script[src*="clarity.ms/"]')){c[a]("start",{projectId:i,upload:"https://h.clarity.ms/collect",expire:365,cookies:["_uetmsclkid","_uetvid","_clck"],track:true,content:true});return}
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","zewj8ey7c1");
+    }
   </script>
 </head>
 <body>
@@ -31,7 +36,7 @@
   </div>
 
   <main id="conteudo">
-    <section class="hero section-dark">
+    <section class="hero section-dark" data-secao="1ª dobra (VSL)">
       <div class="glow glow-one"></div>
       <div class="glow glow-two"></div>
       <div class="container hero-grid">
@@ -62,7 +67,7 @@
       </div>
     </section>
 
-    <section class="trust-strip">
+    <section class="trust-strip" data-secao="Faixa de confiança">
       <div class="container trust-grid">
         <div><strong>+60</strong><span>faixas curtas</span></div>
         <div><strong>6</strong><span>módulos práticos</span></div>
@@ -71,7 +76,7 @@
       </div>
     </section>
 
-    <section class="section demo-section" id="previas">
+    <section class="section demo-section" id="previas" data-secao="Prévias (áudios)">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">ANTES DE DECIDIR, ESCUTE</span>
@@ -115,7 +120,7 @@
       </div>
     </section>
 
-    <section class="section memory-section">
+    <section class="section memory-section" data-secao="Memória musical">
       <div class="container memory-layout">
         <div class="memory-copy reveal">
           <span class="eyebrow">POR QUE APRENDER COM MÚSICA FUNCIONA?</span>
@@ -135,7 +140,7 @@
       </div>
     </section>
 
-    <section class="section problem-section">
+    <section class="section problem-section" data-secao="Problema">
       <div class="container narrow">
         <div class="section-heading reveal">
           <span class="eyebrow">POR QUE VOCÊ ENTENDE, MAS AINDA TRAVA?</span>
@@ -156,7 +161,7 @@
       </div>
     </section>
 
-    <section class="section preview-section" id="por-dentro">
+    <section class="section preview-section" id="por-dentro" data-secao="Folhas por dentro">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">ACOMPANHE CADA FAIXA COM APOIO VISUAL</span>
@@ -179,7 +184,7 @@
       </div>
     </section>
 
-    <section class="section method-section section-dark">
+    <section class="section method-section section-dark" data-secao="Método">
       <div class="container">
         <div class="section-heading light reveal">
           <span class="eyebrow eyebrow-yellow">UMA ROTINA SIMPLES PARA PRATICAR ESPANHOL</span>
@@ -195,7 +200,7 @@
       </div>
     </section>
 
-    <section class="section practical-results-section">
+    <section class="section practical-results-section" data-secao="Resultados práticos">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">O QUE TORNA O MÉTODO TÃO PRÁTICO</span>
@@ -212,7 +217,7 @@
       </div>
     </section>
 
-    <section class="section modules-section">
+    <section class="section modules-section" data-secao="Módulos">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">UMA TRILHA ORGANIZADA</span>
@@ -230,7 +235,7 @@
       </div>
     </section>
 
-    <section class="section transformation-section">
+    <section class="section transformation-section" data-secao="Transformação">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">O QUE MUDA NA PRÁTICA</span>
@@ -252,7 +257,7 @@
       </div>
     </section>
 
-    <section class="section fit-section">
+    <section class="section fit-section" data-secao="Para quem é">
       <div class="container narrow">
         <div class="section-heading reveal">
           <span class="eyebrow">FEITO PARA QUEM QUER COMEÇAR DE VERDADE</span>
@@ -269,7 +274,7 @@
       </div>
     </section>
 
-    <section class="section package-section section-dark" id="conteudo-completo">
+    <section class="section package-section section-dark" id="conteudo-completo" data-secao="O que você recebe">
       <div class="container package-grid">
         <div class="package-visual reveal">
           <img src="assets/img/pacote-completo.webp" alt="Pacote completo Espanhol Cantando" loading="lazy" width="1254" height="1254">
@@ -290,7 +295,7 @@
       </div>
     </section>
 
-    <section class="section bonus-section">
+    <section class="section bonus-section" data-secao="Bônus">
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">PARA COMPLETAR SUA PRÁTICA</span>
@@ -323,7 +328,7 @@
       </div>
     </section>
 
-    <section class="section offer-section" id="oferta">
+    <section class="section offer-section" id="oferta" data-secao="Oferta">
       <div class="container narrow">
         <div class="offer-card reveal">
           <div class="offer-ribbon">ACESSO COMPLETO</div>
@@ -350,14 +355,14 @@
       </div>
     </section>
 
-    <section class="section guarantee-section">
+    <section class="section guarantee-section" data-secao="Garantia">
       <div class="container narrow guarantee-box reveal">
         <div class="guarantee-seal">7<br><small>DIAS</small></div>
         <div><span class="eyebrow">CONHEÇA SEM RISCO</span><h2>Você tem 7 dias para conhecer tudo por dentro</h2><p>Acesse as faixas, abra as folhas e experimente o método com calma. Se quiser solicitar o reembolso dentro desse prazo, basta enviar um e-mail ao nosso suporte — o pedido leva menos de um minuto — e nós cuidamos do restante para devolver 100% do valor pago.</p></div>
       </div>
     </section>
 
-    <section class="section access-section">
+    <section class="section access-section" data-secao="Acesso">
       <div class="container">
         <div class="section-heading reveal"><span class="eyebrow">DEPOIS DO PAGAMENTO</span><h2>Começar é simples</h2></div>
         <div class="access-grid">
@@ -368,7 +373,7 @@
       </div>
     </section>
 
-    <section class="section faq-section">
+    <section class="section faq-section" data-secao="FAQ">
       <div class="container narrow">
         <div class="section-heading reveal"><span class="eyebrow">TIRE SUAS DÚVIDAS</span><h2>Perguntas frequentes</h2></div>
         <div class="faq-list">
@@ -387,7 +392,7 @@
       </div>
     </section>
 
-    <section class="final-cta section-dark">
+    <section class="final-cta section-dark" data-secao="Fechamento">
       <div class="container narrow reveal">
         <span class="eyebrow eyebrow-yellow">SUA PRIMEIRA FAIXA ESTÁ A UM PLAY DE DISTÂNCIA</span>
         <h2>Comece pelas frases que você realmente quer usar em espanhol.</h2>
@@ -408,6 +413,7 @@
 
   <audio id="globalAudio" preload="none"></audio>
   <script src="app.js" defer></script>
+  <script src="rastreio.js" defer></script>
   <script>
     (function () {
       var box = document.querySelector("[data-vsl]");
