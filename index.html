@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/img/mockup-principal.webp">
   <meta name="theme-color" content="#071d3b">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/img/mockup-principal.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/video/vsl-poster.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <script>
     window.pixelId = "lt_px_5dc494c1a96c";
@@ -41,15 +41,13 @@
           <p class="hero-subtitle">Transforme momentos simples da sua rotina em prática: ouça, acompanhe e repita frases que você realmente pode usar — mesmo que hoje ainda trave para responder.</p>
 
           <div class="hero-visual reveal reveal-delay">
-            <img class="hero-mockup" src="assets/img/mockup-principal.webp" alt="Espanhol Cantando no celular com folhas bilíngues" width="1254" height="1254" fetchpriority="high">
-            <div class="mini-player" data-player>
-              <img src="assets/img/faixa-08.webp" alt="Capa da faixa Pode repetir?" width="1254" height="1254">
-              <div class="mini-player-info">
-                <small>OUÇA UMA PRÉVIA REAL</small>
-                <strong>Pode repetir?</strong>
-                <span>Espanhol de sobrevivência</span>
-              </div>
-              <button class="play-button" type="button" aria-label="Tocar prévia" data-audio="assets/audio/faixa-08.mp3">▶</button>
+            <div class="vsl" data-vsl>
+              <video class="vsl-video" src="assets/video/vsl-espanhol-cantando.mp4" poster="assets/video/vsl-poster.webp" width="720" height="900" muted autoplay loop playsinline preload="auto"></video>
+              <button class="vsl-sound" type="button" aria-label="Assistir o vídeo com som">
+                <span class="vsl-sound-icon" aria-hidden="true">▶</span>
+                <strong>Seu vídeo já começou</strong>
+                <small>Toque para assistir com som</small>
+              </button>
             </div>
           </div>
 
@@ -410,5 +408,22 @@
 
   <audio id="globalAudio" preload="none"></audio>
   <script src="app.js" defer></script>
+  <script>
+    (function () {
+      var box = document.querySelector("[data-vsl]");
+      if (!box) return;
+      var v = box.querySelector("video"), btn = box.querySelector(".vsl-sound");
+      btn.addEventListener("click", function () {
+        var a = document.getElementById("globalAudio");
+        if (a && !a.paused) a.pause();
+        v.currentTime = 0; v.muted = false; v.loop = false; v.controls = true;
+        box.classList.add("is-on");
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      });
+      document.querySelectorAll("[data-audio]").forEach(function (b) {
+        b.addEventListener("click", function () { if (!v.muted) v.pause(); });
+      });
+    })();
+  </script>
 </body>
 </html>
