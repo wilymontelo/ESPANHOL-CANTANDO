@@ -1,4 +1,4 @@
-const CHECKOUT_URL = "https://checkout.payt.com.br/e93d120f14b7957d9ecabc76d54f8afe";
+const CHECKOUT_URL = "https://app.zuptos.com.br/checkout/37324b4f3d109e3f";
 
 const todayDate = document.getElementById("todayDate");
 const countdown = document.getElementById("countdown");

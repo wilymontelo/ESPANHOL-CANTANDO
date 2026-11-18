@@ -16,6 +16,6 @@ O arquivo `index.html` está na raiz. Imagens, áudios e prévias ficam em `asse
 
 ## Links configurados
 
-- Checkout: `https://checkout.payt.com.br/e93d120f14b7957d9ecabc76d54f8afe`
+- Checkout: `https://app.zuptos.com.br/checkout/37324b4f3d109e3f`
 - Pixel Lowtrack: `lt_px_5dc494c1a96c`
 

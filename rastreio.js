@@ -84,7 +84,7 @@ function rastrear(fa) {
   document.addEventListener('click', (ev) => {
     const alvo = ev.target;
     const link = alvo.closest('a');
-    const ehCheckout = !!link && /checkout\.payt\.com\.br/.test(link.href);
+    const ehCheckout = !!link && /checkout\.payt\.com\.br|zuptos\.com\.br\/checkout/.test(link.href);
     if (ehCheckout) fa.checkout();
     if (nCliques >= 60) return;
     const sec = alvo.closest('[data-secao]');
